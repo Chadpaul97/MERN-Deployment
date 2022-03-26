@@ -52,15 +52,15 @@ export default function RegistrationForm() {
 
             <form onSubmit={register} className='form-bottom'>
                 <div>
-                    <input type="text" name="firstName" className='form-control' onChange={onChangeHandler} value={form.firstName} placeholder='First Name' />
+                    <input type="text" name="firstName" className='form-control' onChange={onChangeHandler} value={form.firstName} placeholder='First Name' maxLength="10" />
                     <p className="text-danger">{formErrors.firstName?.message}</p>
                 </div>
                 <div>
-                    <input type="text" name="lastName" className='form-control' onChange={onChangeHandler} value={form.lastName} placeholder='Last Name' />
+                    <input type="text" name="lastName" className='form-control' onChange={onChangeHandler} value={form.lastName} placeholder='Last Name' maxLength="10" />
                     <p className="text-danger">{formErrors.lastName?.message}</p>
                 </div>
                 <div>
-                    <input type="text" name="email" className='form-control' onChange={onChangeHandler} value={form.email} placeholder='Email' />
+                    <input type="text" name="email" className='form-control emailForm' onChange={onChangeHandler} value={form.email} placeholder='Email' />
                     <p className="text-danger">{formErrors.email?.message}</p>
                 </div>
                 <div>

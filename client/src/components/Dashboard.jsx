@@ -21,10 +21,11 @@ export default function Dashboard() {
             })
             .catch(err => {
                 console.log('err when getting logged in user', err)
-                // console.log('User Not Found')
-                // history.push("/")
+                console.log('User Not Found')
+                history.push("/")
+                alert("Please Sign In")
             })
-    }, [])
+    }, [history])
 
     const logout = () => {
         axios.get('http://localhost:8000/api/users/logout/', { withCredentials: true })
@@ -36,15 +37,6 @@ export default function Dashboard() {
             })
     }
 
-    const deleteUser = (userId) => {
-        axios.delete('http://localhost:8000/api/users/delete/' + userId, { withCredentials: true })
-            .then(res => {
-                history.push("/")
-            })
-            .catch(err => {
-                console.log("err logging out", err)
-            })
-    }
 
     //TO DO FORM
     const onChangeHandler = (e) => {
@@ -61,6 +53,8 @@ export default function Dashboard() {
                     setFormErrors(res.data.err.errors.todos.errors)
                 }
                 else {
+                    // loggedInUser.todos.push(form)
+                    // setLoggedInUser
                     window.location.reload(false)
                 }
                 console.log("res after adding todo", res)
@@ -72,6 +66,7 @@ export default function Dashboard() {
             })
     }
     const deleteTodo = (userID, todoID) => {
+        console.log(userID, todoID)
         axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID, { withCredentials: true })
             .then(res => {
                 window.location.reload(false)
@@ -124,18 +119,17 @@ export default function Dashboard() {
 
     return (
         <div>
-            <div className='d-flex navbar p-2'>
+            <div className='d-flex navbar p-3'>
                 <h2>Welcome {loggedInUser.firstName}</h2>
+                <Link to={"/edit"}><button className="btn">Profile</button></Link>
                 <button className="btn " onClick={logout}>Logout</button>
-                <Link to={"/edit"}><button className="btn">Edit</button></Link>
-                <button className="btn " onClick={() => deleteUser(loggedInUser._id)}>Delete</button>
             </div>
 
             <form onSubmit={addTodo} className='todoForm container mb-3 p-3 w-50'>
                 <h5>Add To do</h5>
-                <input type="text" placeholder='Title' name='title' className='container' onChange={onChangeHandler} />
+                <input type="text" placeholder='Title' name='title' className='container' onChange={onChangeHandler} maxLength="10" />
                 <p className="text-danger">{formErrors.title?.message}</p>
-                <input type="text" placeholder='Note' name='note' className='container' onChange={onChangeHandler} />
+                <input type="text" placeholder='Note' name='note' className='container' onChange={onChangeHandler} maxLength="125" />
                 <p className="text-danger">{formErrors.note?.message}</p>
                 <button type='addTodo submit'>Add</button>
             </form>
@@ -158,8 +152,11 @@ export default function Dashboard() {
                                 <div className='todos container p-0 d-flex  flex-column '>
                                     <span className='title rounded-top p-2 '><span className={todoClasses.join("")}> Title:  {todo.title} </span><Link to={"/todo/" + [todo._id]}> Edit </Link></span>
                                     <span className={todoClasses.join("")}>Note: {todo.note} </span>
-                                    <div>
-                                        <input type="checkbox" onChange={() => { handleComplete(i) }} checked={todo.complete} />
+                                    <div className='d-flex justify-content-between p-1'>
+                                        <div className='d-flex align-items-center gap-2 '>
+                                            <label>Completed</label>
+                                            <input type="checkbox" onChange={() => { handleComplete(i) }} checked={todo.complete} />
+                                        </div>
                                         <span className="btn " onClick={() => deleteTodo(loggedInUser._id, loggedInUser.todos[i]._id)}>🗑️</span>
                                     </div>
                                 </div>

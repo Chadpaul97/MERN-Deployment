@@ -90,3 +90,8 @@ padding: 0px;
   color: black;
   text-decoration: line-through;
 }
+
+
+.emailForm {
+  text-transform: lowercase;
+}

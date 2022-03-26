@@ -32,7 +32,7 @@ export default function LoginForm() {
                 }
             })
             .catch(err => {
-                console.log('err after regist', err)
+                console.log('err after Login', err)
             })
     }
 
@@ -50,7 +50,7 @@ export default function LoginForm() {
             <div className='form-bottom'>
                 <form className='form-group' onSubmit={login}>
                     <div>
-                        <input type="text" name="email" className='form-control' onChange={onChangeHandler} value={form.email} placeholder='Email' /><br />
+                        <input type="text" name="email" className='form-control emailForm' onChange={onChangeHandler} value={form.email} placeholder='Email' /><br />
                     </div>
                     <div>
                         <input type="password" name="password" className='form-control' onChange={onChangeHandler} value={form.password} placeholder='Password' />

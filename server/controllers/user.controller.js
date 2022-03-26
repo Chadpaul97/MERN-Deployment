@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 // const Todo = require('../models/todos.model')
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 class UserController {
 
     //admin controller features for getting all users
@@ -110,7 +110,10 @@ class UserController {
     deleteAnExistingUser = (req, res) => {
         //puts id into delete one to target user 
         User.deleteOne({ _id: req.params._id })
-            .then(result => res.json({ result: result }))
+            .then(result => {
+                res.json({ result: result })
+                console.log("Deleted User")
+            })
             .catch(err => res.status(400).json({ message: "Something went wrong", err }));
     }
 
@@ -129,20 +132,20 @@ class UserController {
             });
     }
 
-    getATodo = (req, res) => {
-        let toDoID = req.params.toDoID
-        console.log(toDoID)
-        User.findOne({ "todos._id": toDoID })
-            .then(result => {
-                console.log(result)
-                console.log(result.todos.find(todo => todo._id == toDoID))
-                res.json(result.todos.find(todo => todo._id == toDoID))
-            })
-            .catch(err => {
-                res.status(400).json({ message: "Something went wrong", err })
-                console.log(err)
-            });
-    }
+    // getATodo = (req, res) => {
+    //     let toDoID = req.params._id
+    //     console.log(toDoID)
+    //     User.findOne({ "todos._id": toDoID })
+    //         .then(result => {
+    //             console.log(result)
+    //             console.log(result.todos.find(todo => todo._id == toDoID))
+    //             res.json(result.todos.find(todo => todo._id == toDoID))
+    //         })
+    //         .catch(err => {
+    //             res.status(400).json({ message: "Something went wrong", err })
+    //             console.log(err)
+    //         });
+    // }
 
     updateATodo = (req, res) => {
         User.updateOne({ 'todos._id': req.params._id }, { $set: { 'todos.$.title': req.body.title, 'todos.$.note': req.body.note } }, { runValidators: true })
@@ -168,7 +171,7 @@ class UserController {
             { safe: true, multi: true })
             .then(updatedUser => {
                 res.json({ msg: "success!", user: updatedUser })
-                console.log("updated user todos")
+                console.log("Deleted a todo")
             })
             .catch(err => {
                 res.json({ message: "Something went wrong", err })

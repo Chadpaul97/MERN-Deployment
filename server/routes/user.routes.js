@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.patch("/api/users/update/:_id", UserController.updateExistingUser);
 
     //To Do List Routes
-    app.get("/api/users/getUserTodos/:toDoID", UserController.getATodo)
+    // app.get("/api/users/getUserTodos/:_id", UserController.getATodo)
     app.post("/api/users/addTodo/:_id", UserController.addTodos);
 
 

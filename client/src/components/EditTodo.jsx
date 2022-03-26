@@ -20,8 +20,6 @@ export default function EditTodo() {
             })
             .catch(err => {
                 console.log('err when getting logged in user', err)
-                // console.log('User Not Found')
-                // history.push("/")
             })
     }, [])
 
@@ -96,10 +94,10 @@ export default function EditTodo() {
             <form onSubmit={editUser} className='todoForm container mb-3 p-3 w-50 mt-5'>
                 <h5>Edit Todo</h5>
                 <label >Title : </label>
-                <input type="text" placeholder='Title' name='title' className='container' onChange={onChangeHandler} value={userTodo.title} />
+                <input type="text" placeholder='Title' name='title' className='container' onChange={onChangeHandler} value={userTodo.title} maxlength="10" />
                 <p className="text-danger">{formErrors.title?.message}</p>
                 <label >Note : </label>
-                <input type="text" placeholder='Note' name='note' className='container' onChange={onChangeHandler} value={userTodo.note} />
+                <input type="text" placeholder='Note' name='note' className='container' onChange={onChangeHandler} value={userTodo.note} maxlength="125" />
                 <p className="text-danger">{formErrors.note?.message}</p>
                 <button type='submit' className='addTodo '>Submit</button>
             </form>
