@@ -69,11 +69,13 @@ export default function Dashboard() {
         console.log(userID, todoID)
         axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID, { withCredentials: true })
             .then(res => {
+                // setLoggedInUser.todos(res)
                 window.location.reload(false)
             })
             .catch(err => {
                 console.log("err deleting todo", err)
             })
+
     }
 
     const handleComplete = (idx) => {
@@ -149,12 +151,12 @@ export default function Dashboard() {
                         }
                         return (
                             <div key={i} className='container w-50 h-50 '>
-                                <div className='todos container p-0 d-flex  flex-column '>
+                                <div className='todos container p-0 d-flex  flex-column w-75'>
                                     <span className='title rounded-top p-2 '><span className={todoClasses.join("")}> Title:  {todo.title} </span><Link to={"/todo/" + [todo._id]}> Edit </Link></span>
                                     <span className={todoClasses.join("")}>Note: {todo.note} </span>
-                                    <div className='d-flex justify-content-between p-1'>
+                                    <div className='container d-flex justify-content-between p-1'>
                                         <div className='d-flex align-items-center gap-2 '>
-                                            <label>Completed</label>
+                                            <label>Done</label>
                                             <input type="checkbox" onChange={() => { handleComplete(i) }} checked={todo.complete} />
                                         </div>
                                         <span className="btn " onClick={() => deleteTodo(loggedInUser._id, loggedInUser.todos[i]._id)}>🗑️</span>
