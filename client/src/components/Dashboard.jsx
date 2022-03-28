@@ -23,7 +23,7 @@ export default function Dashboard() {
                 console.log('err when getting logged in user', err)
                 console.log('User Not Found')
                 history.push("/")
-                alert("Please Sign In")
+                // alert("Please Sign In")
             })
     }, [history])
 
@@ -53,7 +53,7 @@ export default function Dashboard() {
                     setFormErrors(res.data.err.errors.todos.errors)
                 }
                 else {
-                    // loggedInUser.todos.push(form)
+                    // loggedInUser.todos[...todos,form]
                     // setLoggedInUser
                     window.location.reload(false)
                 }

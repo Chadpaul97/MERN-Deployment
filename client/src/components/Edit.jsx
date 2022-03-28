@@ -61,6 +61,7 @@ export default function Edit() {
     const deleteUser = (userId) => {
         axios.delete('http://localhost:8000/api/users/delete/' + userId, { withCredentials: true })
             .then(res => {
+                console.log(res, "res")
                 history.push("/")
             })
             .catch(err => {

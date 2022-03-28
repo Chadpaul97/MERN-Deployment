@@ -6,11 +6,12 @@ module.exports = (app) => {
     app.post("/api/users/login", UserController.login)
     app.get("/api/users/getloggedinuser", UserController.getLoggedInUser)
     app.get("/api/users/logout", UserController.logout)
-    app.delete("/api/users/delete/:_id", UserController.deleteAnExistingUser, UserController.logout);
+
+    app.delete("/api/users/delete/:_id", UserController.deleteAnExistingUser);
     app.patch("/api/users/update/:_id", UserController.updateExistingUser);
 
     //To Do List Routes
-    // app.get("/api/users/getUserTodos/:_id", UserController.getATodo)
+    app.get("/api/users/getUserTodos/:_id", UserController.getATodo)
     app.post("/api/users/addTodo/:_id", UserController.addTodos);
 
 
