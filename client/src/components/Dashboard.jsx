@@ -67,7 +67,7 @@ export default function Dashboard() {
     }
     const deleteTodo = (userID, todoID) => {
         console.log(userID, todoID)
-        axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID, { withCredentials: true })
+        axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID)
             .then(res => {
                 // setLoggedInUser.todos(res)
                 window.location.reload(false)
