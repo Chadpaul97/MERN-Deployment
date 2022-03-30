@@ -133,10 +133,10 @@ export default function Dashboard() {
 
     return (
         <div>
-            <div className='d-flex navbar p-3'>
-                <h2>Welcome {loggedInUser.firstName}</h2>
-                <Link to={"/edit"}><button className="btn">Profile</button></Link>
-                <button className="btn " onClick={logout}>Logout</button>
+            <div className='d-flex navbar p-3 border-bottom border-dark'>
+                <h1 className='mb-2'>Welcome {loggedInUser.firstName}</h1>
+                <Link to={"/edit"}><button className="btn"><h5>Profile</h5></button></Link>
+                <button className="btn " onClick={logout}><h5>Logout </h5></button>
             </div>
 
             <form onSubmit={addTodo} className='todoForm container mb-3 p-3 w-50'>
