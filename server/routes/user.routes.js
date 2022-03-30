@@ -17,5 +17,6 @@ module.exports = (app) => {
 
     app.put("/api/users/updateATodo/:_id", UserController.updateATodo)
 
-    app.put("/api/users/deleteTodo/:userid/:toDoID", UserController.deleteAnTodo);
+    // app.put("/api/users/deleteTodo/:userid/:toDoID", UserController.deleteAnTodo);
+    app.put("/api/users/deleteTodo/:_id", UserController.deleteAnTodo)
 }

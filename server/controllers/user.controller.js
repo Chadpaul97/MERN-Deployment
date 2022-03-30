@@ -170,24 +170,37 @@ class UserController {
     }
 
     deleteAnTodo = (req, res) => {
-        let userID = req.params.userid;
-        let toDoID = req.params.toDoID
-        console.log(userID)
-        console.log(toDoID)
-        User.findOneAndUpdate(
-            userID,
-            { $pull: { todos: { _id: toDoID } } },
-            { safe: true, multi: true })
+        User.updateOne({ 'todos._id': req.params._id }, { $pull: { todos: { _id: req.params._id } } }, { runValidators: true })
             .then(updatedUser => {
-                res.json({ msg: "success!", user: updatedUser })
-                console.log("Deleted a todo")
+                // console.log(req)
+                res.json({ updatedUser })
+                console.log("updated user successfully", console.log(updatedUser))
             })
             .catch(err => {
                 res.json({ message: "Something went wrong", err })
                 console.log(err, "err")
             });
-
     }
+
+    // deleteAnTodo = (req, res) => {
+    //     let userID = req.params.userid;
+    //     let toDoID = req.params.toDoID
+    //     console.log(userID)
+    //     console.log(toDoID)
+    //     User.findOneAndUpdate(
+    //         userID,
+    //         { $pull: { todos: { _id: toDoID } } },
+    //         { safe: true, multi: true })
+    //         .then(updatedUser => {
+    //             res.json({ msg: "success!", user: updatedUser })
+    //             console.log("Deleted a todo")
+    //         })
+    //         .catch(err => {
+    //             res.json({ message: "Something went wrong", err })
+    //             console.log(err, "err")
+    //         });
+
+    // }
 }
 
 

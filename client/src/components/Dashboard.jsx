@@ -65,9 +65,9 @@ export default function Dashboard() {
                 console.log('err adding todo', err)
             })
     }
-    const deleteTodo = (userID, todoID) => {
-        console.log(userID, todoID)
-        axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID)
+    const deleteTodo = (todoID) => {
+        console.log(todoID)
+        axios.put('http://localhost:8000/api/users/deleteTodo/' + todoID, { withCredentials: true })
             .then(res => {
                 // setLoggedInUser.todos(res)
                 window.location.reload(false)
@@ -77,6 +77,18 @@ export default function Dashboard() {
             })
 
     }
+    // const deleteTodo = (userID, todoID) => {
+    //     console.log(userID, todoID)
+    //     axios.put('http://localhost:8000/api/users/deleteTodo/' + userID + "/" + todoID, { withCredentials: true })
+    //         .then(res => {
+    //             // setLoggedInUser.todos(res)
+    //             window.location.reload(false)
+    //         })
+    //         .catch(err => {
+    //             console.log("err deleting todo", err)
+    //         })
+
+    // }
 
     const handleComplete = (idx) => {
         const updatedTodo = loggedInUser.todos?.map((todo, i) => {
@@ -159,7 +171,7 @@ export default function Dashboard() {
                                             <label>Done</label>
                                             <input type="checkbox" onChange={() => { handleComplete(i) }} checked={todo.complete} />
                                         </div>
-                                        <span className="btn " onClick={() => deleteTodo(loggedInUser._id, loggedInUser.todos[i]._id)}>🗑️</span>
+                                        <span className="btn " onClick={() => deleteTodo(loggedInUser.todos[i]._id)}>🗑️</span>
                                     </div>
                                 </div>
                             </div>)
